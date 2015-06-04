@@ -26,14 +26,18 @@ MyTarget.prototype.log = function(level, facility, args){
 logger.toConsole({
 	level: "debug",
 	timestamp: true,
-	colorize: true
+	colorize: true,
 }).toFile("demo.log", {
 	level: "info",
-	timestamp: true
+	timestamp: true,
 }).toJsonFile("demo.json", {
 	level: "warn"
 }).to("my", new MyTarget({
 	prefix: "my-target"
+})).to("another-console", new logger.ConsoleTarget({
+	level: "debug",
+	timestamp: false,
+	facilities: ["test-b"]
 }));
 
 //Logging without specifying facility
@@ -44,11 +48,12 @@ logger.warn("Hello %s", "warn");
 logger.error("Hello %s", "error");
 
 //Create facility shorthand
-var facilityLogger = logger.facility("test");
+var facilityLoggerA = logger.facility("test-a");
+var facilityLoggerB = logger.facility("test-b");
 
 //Log with facility prefix
-facilityLogger.log("info", "Hello %s", "world");
-facilityLogger.debug("Hello %s", "debug");
-facilityLogger.info("Hello %s", "info");
-facilityLogger.warn("Hello %s", "warn");
-facilityLogger.error("Hello %s", "error");
+facilityLoggerA.log("info", "Hello %s", "world");
+facilityLoggerA.debug("Hello %s", "debug");
+facilityLoggerB.info("Hello %s", "info");
+facilityLoggerA.warn("Hello %s", "warn");
+facilityLoggerB.error("Hello %s", "error");

@@ -2,8 +2,6 @@
 Lightweight logging library for NodeJS with support of facilities and multiple transports.
 
 ## Usage
-Following code demonstrates usage of meta-logger with all logging methods and targets params.
-
 ```javascript
 var logger = require("meta-logger");
 
@@ -14,7 +12,8 @@ logger.toConsole({
 	colorize: true
 }).toFile("demo.log", {
 	level: "info",
-	timestamp: true
+	timestamp: true,
+	facilities: [ "test" ]
 }).toJsonFile("demo.json", {
 	level: "warn"
 });
@@ -35,6 +34,78 @@ facilityLogger.debug("Hello %s", "debug");
 facilityLogger.info("Hello %s", "info");
 facilityLogger.warn("Hello %s", "warn");
 facilityLogger.error("Hello %s", "error");
+```
+
+**Note:** console target is set by default.
+
+## Configuring logging targets
+### Console
+Prints log messages to stdout (console).
+
+```javascript
+logger.toConsole({
+	level: "debug",
+	facilities: [...], //or null to accept all facilities
+	timestamp: true,
+	colorize: true,
+	colors: {
+		debug: 	colors.cyan,
+		info: 	colors.white,
+		warn: 	colors.yellow,
+		error: 	colors.red
+	}
+});
+```
+
+Method `toConsole` overrides previous console target settings. You can use more console targets (for multiple configurations):
+
+```
+logger.to(new Logger.ConsoleTarget({
+	///... options ...
+}));
+```
+
+### File
+Append log messages to specified file.
+
+Message is formatted same way as to console.
+
+File target can be set for multiple files with different configuration.
+
+```javascript
+logger.toFile(filename, {
+	level: "debug",
+	facilities: [...], //or null to accept all facilities
+	timestamp: true
+}).toFile(anotherFilename, {
+	level: "error",
+	timestamp: true,
+	//...
+});
+```
+
+### JSON file
+Append log messages to specified file in JSON format.
+
+```javascript
+logger.toFile(filename, {
+	level: "debug",
+	facilities: [...], //or null to accept all facilities
+	timestamp: true
+}).toFile(anotherFilename, {
+	level: "error",
+	timestamp: true,
+	//...
+});
+```
+
+Log file has following format:
+
+```
+{},
+{"timestamp":"2015-06-04T21:20:54.627Z","level":"warn","facility":null,"msg":["Hello %s","warn"]},
+{"timestamp":"2015-06-04T21:20:54.629Z","level":"error","facility":"test","msg":["Hello %s","error"]}
+...
 ```
 
 ## Custom logging target
@@ -79,6 +150,19 @@ MyLogger.prototype.write = function(level, facility, msg){
 
 	console.log(level, facility, this.prefix, msg.join(" "));
 
+};
+```
+
+## Custom logging levels
+Logging levels can be set by modifying `logger.levels` property.
+
+```javascript
+logger.levels = {
+		custom: 4,
+		debug: 	3,
+		info: 	2,
+		warn: 	1,
+		error: 	0
 };
 ```
 

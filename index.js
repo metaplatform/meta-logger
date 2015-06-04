@@ -134,6 +134,7 @@ Logger.BaseTarget = function(options){
 	options = options || {};
 
 	this.level = options.level || "info";
+	this.facilities = options.facilities || null;
 	this.timestamp = options.timestamp || false;
 
 };
@@ -141,6 +142,7 @@ Logger.BaseTarget = function(options){
 Logger.BaseTarget.prototype.log = function(level, facility, args){
 
 	if(Logger.levels[level] > Logger.levels[this.level]) return;
+	if(this.facilities !== null && this.facilities.indexOf(facility) < 0) return;
 
 	var msg = [util.format.apply(this, args)];
 
@@ -257,6 +259,7 @@ util.inherits(Logger.JsonFileTarget, Logger.FileTarget);
 Logger.JsonFileTarget.prototype.log = function(level, facility, msg){
 
 	if(Logger.levels[level] > Logger.levels[this.level]) return;
+	if(this.facilities !== null && this.facilities.indexOf(facility) < 0) return;
 
 	this.write(level, facility, msg);
 
@@ -272,6 +275,13 @@ Logger.JsonFileTarget.prototype.write = function(level, facility, msg){
 	}), null, "utf-8");
 
 }
+
+//Default targets
+Logger.toConsole({
+	level: "info",
+	colorize: true,
+	timestamp: false
+});
 
 //Export
 module.exports = Logger;
