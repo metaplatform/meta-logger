@@ -105,11 +105,13 @@ Log file has following format:
 ```
 
 ## Custom logging target
-Custom logger is defined by instance of simple object which implements `log` method and registered to logger via `to` method.
+Custom target is defined by instance of simple object which implements `log` method and registered to logger via `to` method.
 
 Following example shows how to define custom target:
 
 ```javascript
+var util = require("util");
+
 var MyTarget = function(options){
 
 	options = options || {};
@@ -154,11 +156,11 @@ Logging levels can be set by modifying `logger.levels` property.
 
 ```javascript
 logger.levels = {
-		custom: 4,
-		debug: 	3,
-		info: 	2,
-		warn: 	1,
-		error: 	0
+	custom: 4,
+	debug: 	3,
+	info: 	2,
+	warn: 	1,
+	error: 	0
 };
 ```
 
