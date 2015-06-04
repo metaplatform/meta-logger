@@ -1,0 +1,28 @@
+{
+  "name": "meta-logger",
+  "version": "1.0.0",
+  "description": "Light logging library for NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/metaplatform/meta-logger.git"
+  },
+  "keywords": [
+    "log",
+    "logging",
+    "logger",
+    "facility"
+  ],
+  "author": "Jiri Hybek <jiri.hybek@cryonix.cz>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/metaplatform/meta-logger/issues"
+  },
+  "homepage": "https://github.com/metaplatform/meta-logger",
+  "dependencies": {
+    "colors": "^1.1.0"
+  }
+}
