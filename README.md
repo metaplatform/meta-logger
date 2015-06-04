@@ -49,10 +49,10 @@ logger.toConsole({
 	timestamp: true,
 	colorize: true,
 	colors: {
-		debug: 	colors.cyan,
-		info: 	colors.white,
-		warn: 	colors.yellow,
-		error: 	colors.red
+		debug: 	logger.colors.cyan,
+		info: 	logger.colors.white,
+		warn: 	logger.colors.yellow,
+		error: 	logger.colors.red
 	}
 });
 ```
@@ -70,7 +70,7 @@ Append log messages to specified file.
 
 Message is formatted same way as to console.
 
-File target can be set for multiple files with different configuration.
+File target can be set for multiple files with different configurations.
 
 ```javascript
 logger.toFile(filename, {
@@ -88,14 +88,10 @@ logger.toFile(filename, {
 Append log messages to specified file in JSON format.
 
 ```javascript
-logger.toFile(filename, {
+logger.toJsonFile(filename, {
 	level: "debug",
 	facilities: [...], //or null to accept all facilities
 	timestamp: true
-}).toFile(anotherFilename, {
-	level: "error",
-	timestamp: true,
-	//...
 });
 ```
 
@@ -163,6 +159,61 @@ logger.levels = {
 		info: 	2,
 		warn: 	1,
 		error: 	0
+};
+```
+
+## Logger object reference
+```javascript
+logger = {
+
+	//Colors library for console coloring
+	colors: require("colors"),
+
+	//Logging levels
+	levels: {
+		debug: 	3,
+		info: 	2,
+		warn: 	1,
+		error: 	0
+	},
+
+	//Object contains registered targets
+	targets: {},
+
+	//Logging functions
+	log: function(level, args...),
+	debug: function(args...),
+	info: function(args...),
+	warn: function(args...),
+	error: function(args...),
+
+	//Facility shorthand
+	facility: function(name){
+
+		return {
+
+			log: function(level, args...),
+			debug: function(args...),
+			info: function(args...),
+			warn: function(args...),
+			error: function(args...)
+
+		};
+
+	},
+
+	//Target shorthands
+	to: function(name, targetObject),
+	toConsole: function(options),
+	toFile: function(filename, options),
+	toJsonFile: function(filename, options),
+
+	//Target constructors
+	BaseTarget: function(options),
+	ConsoleTarget: function(options),
+	FileTarget: function(filename, options),
+	JsonFileTarget: function(filename, options)
+
 };
 ```
 

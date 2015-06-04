@@ -5,7 +5,6 @@
  * See LICENSE file distributed with this source code for licensing info
  */
 
-var colors = require("colors");
 var util = require("util");
 var fs = require("fs");
 
@@ -13,6 +12,8 @@ var fs = require("fs");
  * Logger object
  */
 var Logger = {
+
+	colors: require("colors"),
 
 	levels: {
 		debug: 	3,
@@ -196,10 +197,10 @@ Logger.ConsoleTarget = function(options){
 		this.colors = options.colors;
 	else
 		this.colors = {
-			debug: 	colors.cyan,
-			info: 	colors.white,
-			warn: 	colors.yellow,
-			error: 	colors.red
+			debug: 	Logger.colors.cyan,
+			info: 	Logger.colors.white,
+			warn: 	Logger.colors.yellow,
+			error: 	Logger.colors.red
 		}
 
 };
