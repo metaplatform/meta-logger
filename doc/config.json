@@ -1,0 +1,29 @@
+{
+  "title": "META Logger",
+  "header_title": "<strong>META</strong> Logger",
+  "meta": {
+    "description": "Lightweight logging library for NodeJS with support of facilities and multiple transports.",
+    "keywords": "meta-logger, logger, logging, log",
+    "author": "META Platform Team <www.meta-platform.com>"
+  },
+  "header_github": "https://github.com/metaplatform/meta-logger",
+	"menu": [
+	    {
+	        "label": "Support",
+	        "link": "http://code.meta-platform.com/meta/#10_Support",
+	        "target": "_blank"
+	    }
+	],
+	"footer_links": [
+	    {
+	        "label": "Privacy Policy",
+	        "link": "http://code.meta-platform.com/meta/#40_Privacy_policy",
+	        "target": "_blank"
+	    },
+	    {
+	        "label": "Report an issue",
+	        "link": "https://github.com/metaplatform/meta-logger/issues",
+	        "target": "_blank"
+	    }
+	]
+}
