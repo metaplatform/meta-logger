@@ -1,3 +1,4 @@
 {
-	"icon": "comment-processing-outline"
+	"icon": "comment-processing-outline",
+	"description": "Lightweight logging library for NodeJS with support of facilities and multiple transports."
 }
