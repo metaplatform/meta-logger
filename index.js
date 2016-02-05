@@ -275,7 +275,7 @@ Logger.JsonFileTarget.prototype.write = function(level, facility, msg){
 		msg: msg
 	}), null, "utf-8");
 
-}
+};
 
 //Default targets
 Logger.toConsole({
@@ -284,5 +284,9 @@ Logger.toConsole({
 	timestamp: false
 });
 
+//Set global
+if(!global.MetaLogger)
+	global.MetaLogger = Logger;
+
 //Export
-module.exports = Logger;
+module.exports = global.MetaLogger;
