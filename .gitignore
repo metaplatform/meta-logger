@@ -28,6 +28,9 @@ node_modules
 demo.log
 demo.json
 
+# OS X
+.DS_Store
+
 # Doc compiled site
 doc/site/*
 .cache

@@ -235,7 +235,9 @@ util.inherits(Logger.FileTarget, Logger.BaseTarget);
 
 Logger.FileTarget.prototype.write = function(level, facility, msg){
 
-	fs.write(this.fd, msg.join(" ") + "\n", null, "utf-8");
+	fs.write(this.fd, msg.join(" ") + "\n", null, "utf-8", function(){
+		// Callback provided due to deprecation issue
+	});
 
 };
 
@@ -273,7 +275,9 @@ Logger.JsonFileTarget.prototype.write = function(level, facility, msg){
 		level: level,
 		facility: facility,
 		msg: msg
-	}), null, "utf-8");
+	}), null, "utf-8", function(){
+		// Callback provided due to deprecation issue
+	});
 
 };
 
